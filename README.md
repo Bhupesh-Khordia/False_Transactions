@@ -27,10 +27,7 @@ False_Transactions/
 ├── data/
 │   └── fraud.csv
 ├── src/
-│   ├── data_preprocessing.py
-│   ├── feature_engineering.py
-│   ├── model_training.py
-│   └── evaluation.py
+│   └──  fraud_analysis.py
 ├── requirements.txt
 └── README.md
 ```
@@ -38,7 +35,8 @@ False_Transactions/
 ## Setup Instructions
 1. Install dependencies: `pip install -r requirements.txt`
 2. Download dataset to `data/fraud.csv`
-3. Run python file: `src/fraud_analysis.py`
+   Link - [➡️ Download from Google Drive](https://drive.usercontent.google.com/download?id=1VNpyNkGxHdskfdTNRSjjyNa5qC9u0JyV&export=download&authuser=0)
+4. Run python file: `src/fraud_analysis.py`
 
 ## Methodology
 1. **Data Cleaning**: Handle missing values, outliers, and multicollinearity
