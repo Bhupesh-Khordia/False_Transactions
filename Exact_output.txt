@@ -1,0 +1,819 @@
+python .\fraud_analysis.py
+
+FRAUD DETECTION MODEL - FINANCIAL TRANSACTIONS
+============================================================
+============================================================
+1. DATA LOADING AND INITIAL EXPLORATION
+============================================================
+Loading dataset...
+Dataset shape: (6362620, 11)
+Columns: ['step', 'type', 'amount', 'nameOrig', 'oldbalanceOrg', 'newbalanceOrig', 'nameDest', 'oldbalanceDest', 'newbalanceDest', 'isFraud', 'isFlaggedFraud']
+Data types:
+step                int64
+type               object
+amount            float64
+nameOrig           object
+oldbalanceOrg     float64
+newbalanceOrig    float64
+nameDest           object
+oldbalanceDest    float64
+newbalanceDest    float64
+isFraud             int64
+isFlaggedFraud      int64
+dtype: object
+
+Missing Values:
+Empty DataFrame
+Columns: [Missing_Count, Missing_Percentage]
+Index: []
+
+Duplicate rows: 0
+
+Target variable distribution:
+isFraud
+0    6354407
+1       8213
+Name: count, dtype: int64
+Fraud percentage: 0.1291%
+
+============================================================
+2. DATA CLEANING AND PREPROCESSING
+============================================================
+Outliers in amount: 338078 (5.31%)
+Data cleaning completed.
+Shape after cleaning: (6362620, 15)
+
+============================================================
+3. EXPLORATORY DATA ANALYSIS
+============================================================
+
+Transaction Type Analysis:
+          Total_Transactions  Fraud_Count  Fraud_Rate
+type
+TRANSFER              532909         4097      0.0077
+CASH_OUT             2237500         4116      0.0018
+CASH_IN              1399284            0      0.0000
+DEBIT                  41432            0      0.0000
+PAYMENT              2151495            0      0.0000
+
+Amount Analysis:
+                 mean     median           std   min          max
+isFraud
+0        1.781970e+05   74684.72  5.962370e+05  0.01  92445516.64
+1        1.467967e+06  441423.44  2.404253e+06  0.00  10000000.00
+
+Balance Analysis:
+High balance ratio fraud cases: 8081 (98.4%)
+
+============================================================
+4. FEATURE ENGINEERING
+============================================================
+Shape after feature engineering: (6362620, 25)
+New features created: ['balance_ratio_dest', 'day_of_week', 'orig_freq', 'hour_of_day', 'balance_ratio_orig', 'type_encoded', 'amount_log', 'amount_balance_interaction', 'dest_freq', 'amount_sqrt']
+
+============================================================
+5. MULTICOLLINEARITY ANALYSIS
+============================================================
+Highly correlated feature pairs (|correlation| > 0.8):
+amount - balance_diff_dest: 0.846
+amount - amount_balance_ratio: 0.817
+amount - balance_ratio_orig: 0.817
+oldbalanceOrg - newbalanceOrig: 0.999
+oldbalanceDest - newbalanceDest: 0.977
+amount_balance_ratio - balance_ratio_orig: 1.000
+amount_capped - amount_log: 0.833
+amount_capped - amount_sqrt: 0.881
+amount_log - amount_sqrt: 0.829
+
+============================================================
+6. MODEL PREPARATION
+============================================================
+Feature matrix shape: (6362620, 21)
+Target variable shape: (6362620,)
+Fraud rate: 0.0013
+
+Training set: 5090096 samples
+Test set: 1272524 samples
+Training fraud rate: 0.0013
+Test fraud rate: 0.0013
+
+Original training set distribution:
+Training set: 5090096 samples
+Test set: 1272524 samples
+Training fraud rate: 0.0013
+Test fraud rate: 0.0013
+
+Original training set distribution:
+Test set: 1272524 samples
+Training fraud rate: 0.0013
+Test fraud rate: 0.0013
+
+Original training set distribution:
+Training fraud rate: 0.0013
+Test fraud rate: 0.0013
+
+Original training set distribution:
+
+Original training set distribution:
+isFraud
+Original training set distribution:
+isFraud
+0    5083526
+isFraud
+0    5083526
+1       6570
+0    5083526
+1       6570
+1       6570
+Name: count, dtype: int64
+Name: count, dtype: int64
+
+
+Balanced training set distribution:
+isFraud
+0    5083526
+1    5083526
+Name: count, dtype: int64
+
+Scaled training set shape: (10167052, 21)
+Scaled test set shape: (1272524, 21)
+
+============================================================
+============================================================
+============================================================
+============================================================
+============================================================
+7. MODEL TRAINING AND EVALUATION
+============================================================
+
+============================================================
+7. MODEL TRAINING AND EVALUATION
+============================================================
+
+Training Logistic Regression...
+Logistic Regression Results:
+  Accuracy: 0.9698
+============================================================
+7. MODEL TRAINING AND EVALUATION
+============================================================
+
+Training Logistic Regression...
+Logistic Regression Results:
+  Accuracy: 0.9698
+  Precision: 0.0388
+============================================================
+7. MODEL TRAINING AND EVALUATION
+============================================================
+
+Training Logistic Regression...
+Logistic Regression Results:
+============================================================
+7. MODEL TRAINING AND EVALUATION
+============================================================
+
+============================================================
+7. MODEL TRAINING AND EVALUATION
+7. MODEL TRAINING AND EVALUATION
+============================================================
+
+Training Logistic Regression...
+Logistic Regression Results:
+  Accuracy: 0.9698
+  Precision: 0.0388
+  Recall: 0.9404
+============================================================
+
+Training Logistic Regression...
+Logistic Regression Results:
+  Accuracy: 0.9698
+  Precision: 0.0388
+  Recall: 0.9404
+  F1-Score: 0.0745
+  ROC-AUC: 0.9913
+
+============================================================
+
+Training Logistic Regression...
+Logistic Regression Results:
+  Accuracy: 0.9698
+  Precision: 0.0388
+  Recall: 0.9404
+  F1-Score: 0.0745
+  ROC-AUC: 0.9913
+
+Training Random Forest...
+
+============================================================
+
+Training Logistic Regression...
+Logistic Regression Results:
+  Accuracy: 0.9698
+  Precision: 0.0388
+  Recall: 0.9404
+============================================================
+
+Training Logistic Regression...
+Logistic Regression Results:
+  Accuracy: 0.9698
+============================================================
+
+Training Logistic Regression...
+Logistic Regression Results:
+  Accuracy: 0.9698
+  Precision: 0.0388
+  Recall: 0.9404
+  F1-Score: 0.0745
+  ROC-AUC: 0.9913
+
+Training Random Forest...
+
+
+
+
+
+
+
+
+
+Training Logistic Regression...
+Logistic Regression Results:
+  Accuracy: 0.9698
+  Precision: 0.0388
+  Recall: 0.9404
+  F1-Score: 0.0745
+  ROC-AUC: 0.9913
+
+Training Random Forest...
+
+
+
+
+
+
+
+
+Training Logistic Regression...
+Logistic Regression Results:
+  Accuracy: 0.9698
+  Precision: 0.0388
+  Recall: 0.9404
+  F1-Score: 0.0745
+  ROC-AUC: 0.9913
+
+Training Random Forest...
+
+
+
+
+
+
+
+Training Logistic Regression...
+Logistic Regression Results:
+  Accuracy: 0.9698
+  Precision: 0.0388
+  Recall: 0.9404
+  F1-Score: 0.0745
+  ROC-AUC: 0.9913
+
+Training Random Forest...
+
+
+
+Training Logistic Regression...
+Logistic Regression Results:
+  Accuracy: 0.9698
+  Precision: 0.0388
+  Recall: 0.9404
+  F1-Score: 0.0745
+Training Logistic Regression...
+Logistic Regression Results:
+  Accuracy: 0.9698
+  Precision: 0.0388
+Training Logistic Regression...
+Training Logistic Regression...
+Logistic Regression Results:
+Training Logistic Regression...
+Logistic Regression Results:
+  Accuracy: 0.9698
+  Precision: 0.0388
+  Recall: 0.9404
+  F1-Score: 0.0745
+  ROC-AUC: 0.9913
+
+Training Random Forest...
+
+
+
+
+
+
+
+
+
+
+Training Logistic Regression...
+Logistic Regression Results:
+  Accuracy: 0.9698
+  Precision: 0.0388
+  Recall: 0.9404
+  F1-Score: 0.0745
+  ROC-AUC: 0.9913
+
+Training Random Forest...
+
+
+
+
+
+Training Logistic Regression...
+Logistic Regression Results:
+  Accuracy: 0.9698
+  Precision: 0.0388
+  Recall: 0.9404
+  F1-Score: 0.0745
+  ROC-AUC: 0.9913
+
+Training Random Forest...
+
+
+Training Logistic Regression...
+Logistic Regression Results:
+  Accuracy: 0.9698
+  Precision: 0.0388
+  Recall: 0.9404
+  F1-Score: 0.0745
+Logistic Regression Results:
+  Accuracy: 0.9698
+  Precision: 0.0388
+  Recall: 0.9404
+  F1-Score: 0.0745
+  ROC-AUC: 0.9913
+
+Training Random Forest...
+
+
+
+
+
+
+
+
+
+
+  Accuracy: 0.9698
+  Precision: 0.0388
+  Recall: 0.9404
+  F1-Score: 0.0745
+  ROC-AUC: 0.9913
+
+Training Random Forest...
+
+
+
+
+
+
+
+
+
+  Accuracy: 0.9698
+  Precision: 0.0388
+  Recall: 0.9404
+  F1-Score: 0.0745
+  ROC-AUC: 0.9913
+
+Training Random Forest...
+
+
+
+
+
+
+
+  Accuracy: 0.9698
+  Precision: 0.0388
+  Recall: 0.9404
+  F1-Score: 0.0745
+  ROC-AUC: 0.9913
+
+Training Random Forest...
+
+
+
+
+  Accuracy: 0.9698
+  Precision: 0.0388
+  Recall: 0.9404
+  F1-Score: 0.0745
+  ROC-AUC: 0.9913
+
+  Accuracy: 0.9698
+  Precision: 0.0388
+  Recall: 0.9404
+  F1-Score: 0.0745
+  Accuracy: 0.9698
+  Precision: 0.0388
+  Accuracy: 0.9698
+  Accuracy: 0.9698
+  Accuracy: 0.9698
+  Accuracy: 0.9698
+  Precision: 0.0388
+  Recall: 0.9404
+  Accuracy: 0.9698
+  Accuracy: 0.9698
+  Accuracy: 0.9698
+  Precision: 0.0388
+  Recall: 0.9404
+  Accuracy: 0.9698
+  Precision: 0.0388
+  Accuracy: 0.9698
+  Precision: 0.0388
+  Accuracy: 0.9698
+  Accuracy: 0.9698
+  Precision: 0.0388
+  Recall: 0.9404
+  F1-Score: 0.0745
+  ROC-AUC: 0.9913
+  Accuracy: 0.9698
+  Precision: 0.0388
+  Recall: 0.9404
+  F1-Score: 0.0745
+  ROC-AUC: 0.9913
+
+Training Random Forest...
+
+
+
+  Accuracy: 0.9698
+  Precision: 0.0388
+  Recall: 0.9404
+  F1-Score: 0.0745
+  ROC-AUC: 0.9913
+
+Training Random Forest...
+  F1-Score: 0.0745
+  ROC-AUC: 0.9913
+
+Training Random Forest...
+
+Training Random Forest...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Random Forest Results:
+  Accuracy: 1.0000
+  Precision: 0.9814
+  Recall: 0.9976
+  F1-Score: 0.9894
+  ROC-AUC: 0.9991
+
+Training Gradient Boosting...
+Gradient Boosting Results:
+  Accuracy: 0.9997
+  Precision: 0.8300
+  Recall: 0.9988
+  F1-Score: 0.9066
+  ROC-AUC: 0.9999
+
+Model Performance Comparison:
+                 Model  Accuracy  Precision  Recall  F1-Score  ROC-AUC
+0  Logistic Regression    0.9698     0.0388  0.9404    0.0745   0.9913
+1        Random Forest    1.0000     0.9814  0.9976    0.9894   0.9991
+2    Gradient Boosting    0.9997     0.8300  0.9988    0.9066   0.9999
+
+Best model based on F1-Score: Random Forest
+
+============================================================
+8. FEATURE IMPORTANCE ANALYSIS
+============================================================
+Top 15 Most Important Features:
+                       Feature  Importance
+15          balance_ratio_orig    0.236437
+7            balance_diff_orig    0.212831
+9         amount_balance_ratio    0.160292
+3               newbalanceOrig    0.083293
+2                oldbalanceOrg    0.079711
+20  amount_balance_interaction    0.041616
+16          balance_ratio_dest    0.030893
+17                type_encoded    0.029711
+1                       amount    0.025090
+13                  amount_log    0.023652
+14                 amount_sqrt    0.018659
+10               amount_capped    0.014958
+8            balance_diff_dest    0.013112
+18                 hour_of_day    0.009901
+0                         step    0.008343
+
+============================================================
+9. BUSINESS INSIGHTS AND RECOMMENDATIONS
+============================================================
+KEY INSIGHTS AND RECOMMENDATIONS
+==================================================
+
+1. TRANSACTION TYPE ANALYSIS:
+          Total_Transactions  Fraud_Count  Fraud_Rate
+type
+TRANSFER              532909         4097      0.0077
+CASH_OUT             2237500         4116      0.0018
+CASH_IN              1399284            0      0.0000
+DEBIT                  41432            0      0.0000
+PAYMENT              2151495            0      0.0000
+
+Recommendation: Focus monitoring on TRANSFER and CASH-OUT transactions
+
+2. AMOUNT ANALYSIS:
+Fraudulent transactions - Mean: 1467967.30, Median: 441423.44
+Legitimate transactions - Mean: 178197.04, Median: 74684.72
+
+Recommendation: Set up alerts for transactions above certain thresholds
+
+3. BALANCE ANALYSIS:
+High balance ratio fraud cases: 8081 (98.4%)
+
+Recommendation: Monitor transactions that drain more than 80% of account balance
+
+4. TIME-BASED PATTERNS:
+Peak fraud hours: [10, 2, 8]
+
+Recommendation: Increase monitoring during peak hours
+
+5. MODEL PERFORMANCE INSIGHTS:
+Best model: Random Forest
+F1-Score: 0.9894
+Precision: 0.9814
+Recall: 0.9976
+
+Recommendation: Deploy the model with regular retraining
+
+6. PREVENTION STRATEGIES:
+- Implement real-time transaction monitoring
+- Set up multi-factor authentication
+- Use behavioral analysis for unusual patterns
+- Implement transaction limits based on account history
+- Regular security audits and system updates
+
+7. MONITORING AND EVALUATION:
+- Track model performance metrics over time
+- Monitor false positive and false negative rates
+- Conduct regular model retraining with new data
+- Implement A/B testing for new fraud detection rules
+- Regular review of fraud patterns and trends
+
+============================================================
+10. CONCLUSION
+============================================================
+
+This comprehensive fraud detection analysis has provided valuable insights into:
+1. Data Quality: The dataset was well-structured with minimal missing values
+2. Fraud Patterns: Clear patterns emerged in transaction types, amounts, and timing
+3. Model Performance: Achieved strong performance with appropriate handling of class imbalance
+4. Feature Importance: Identified key factors that predict fraudulent transactions
+5. Actionable Insights: Provided concrete recommendations for fraud prevention
+
+The model can be deployed in production with regular monitoring and updates to maintain effectiveness against evolving fraud patterns.
